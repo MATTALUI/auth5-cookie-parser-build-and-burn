@@ -1,16 +1,20 @@
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 
+app.use(cookieParser());
 app.get('/set', (req,res,next) => {
-  
+  res.cookie('foo', 'bar');
+  res.send();
 });
 
 app.get('/read', (req,res,next) => {
-
+  res.send(req.cookies);
 });
 
 app.get('/clear', (req,res,next) => {
-
+  res.clearCookie('deleteMe');
+ res.send();
 });
 
 app.listen('3000', () => {
